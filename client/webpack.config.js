@@ -12,7 +12,6 @@ module.exports = {
 	},
 	devServer: {
 		port: 3000,
-		//watchContentBase: true,
 	},
 	resolve: {
 		extensions: ['.js', '.ts', '.jsx', '.tsx', '.json']
