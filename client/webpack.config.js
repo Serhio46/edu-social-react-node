@@ -8,7 +8,6 @@ module.exports = {
 	entry: ['@babel/polyfill', './src/index.tsx'],
 	output: {
 		filename: '[name].[hash].js',
-		//filename: `${filename('js')}`,
 		path: path.resolve(__dirname, "dist"),
 	},
 	devServer: {
