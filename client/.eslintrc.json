@@ -5,9 +5,16 @@
       "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
+		  "plugin:react-hooks/recommended",
+		  "plugin:react/recommended",
+		  "plugin:import/errors",
+		  "plugin:import/warnings",
+		  "plugin:import/typescript",
         "airbnb",
-		  "prettier"
+		  "airbnb-typescript",
+		  "plugin:prettier/recommended",
+		  "prettier",
+		  "prettier/react"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -33,7 +40,10 @@
 			  "ts": "never",
 			  "tsx": "never"
 			}
-		]
+		],
+		"semi": ["error", "always"],
+		"linebreak-style": ["error", "windows"],
+		"eol-last": ["error", "windows"]
 	 },
 	 "settings": {
 		"import/resolver": {

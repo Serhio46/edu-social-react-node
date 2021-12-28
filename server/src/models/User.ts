@@ -9,7 +9,7 @@ const User = new Schema({
   avatar: { type: String, default: '' },
   courses: [{ type: ObjectId, ref: 'Course' }],
   followers: { type: Array, default: [] },
-  followings: { type: Array, default: [] },
+  followings: { type: Array, default: [] },   
   city: { type: String, max: 50 },
 });
 
