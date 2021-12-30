@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connect from './db/connect';
-import routes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -11,6 +11,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/api/auth', userRoutes);
+
 const startServer = async () => {
    const PORT = process.env.PORT as string;
 
@@ -18,7 +20,6 @@ const startServer = async () => {
       await connect();
       app.listen(PORT, () => {
          console.log(`Server has started on port: ${PORT} `);
-         routes(app);
       });
    } catch (error) {
       console.log(error);

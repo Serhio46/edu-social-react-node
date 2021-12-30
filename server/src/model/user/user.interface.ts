@@ -6,7 +6,7 @@ export default interface User extends Document {
    userName?: string;
    roles?: string[];
    avatar?: string;
-   courses?: Object[];
+   courses: Object[];
    followers?: [];
    followings?: [];
    city?: string;
