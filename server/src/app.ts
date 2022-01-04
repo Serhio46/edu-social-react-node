@@ -6,7 +6,7 @@ import cors from 'cors';
 
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
-import errorMidleware from './middleware/error.middleware';
+import errorMiddleware from './middleware/error.middleware';
 
 dotenv.config();
 const app = express();
@@ -15,10 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
-app.use(errorMidleware);
-
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use(errorMiddleware);
 
 const startServer = async () => {
    const PORT = process.env.PORT as string;
