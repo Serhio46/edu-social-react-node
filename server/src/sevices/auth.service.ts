@@ -1,16 +1,17 @@
 import UserModel from '../model/user/user.model';
 import tokenService from './token.service';
 import bcrypt from 'bcryptjs';
+import ApiError from '../exceptions/api-error';
 
 class AuthService {
    async logIn(email: string, password: string) {
       const user = await UserModel.findOne({ email });
       if (!user) {
-         throw new Error(`User with email ${email} not found`);
+         throw ApiError.BadRequest(`User with email ${email} not found`);
       }
       const isPassValid = bcrypt.compareSync(password, user.password);
       if (!isPassValid) {
-         throw new Error(`Wrong email or password`);
+         throw ApiError.BadRequest(`Wrong email or password`);
       }
       const tokens = tokenService.generateToken({ id: user._id });
       await tokenService.saveToken(user._id, tokens.refreshToken);
@@ -28,13 +29,13 @@ class AuthService {
 
    async refreshToken(refreshToken: string) {
       if (!refreshToken) {
-         throw new Error(`User not autorized`);
+         throw ApiError.UnauthorizedError();
       }
       const userData = tokenService.validateRefreshToken(refreshToken);
       const tokenFromDB = tokenService.findToken(refreshToken);
       const user = await UserModel.findById(userData);
       if (!userData || !tokenFromDB || !user) {
-         throw new Error(`User not autorized`);
+         throw ApiError.UnauthorizedError();
       }
       const tokens = tokenService.generateToken({ id: user._id });
       await tokenService.saveToken(user._id, tokens.refreshToken);
@@ -48,7 +49,7 @@ class AuthService {
    async makeSession(userId: string) {
       const user = await UserModel.findById(userId);
       if (!user) {
-         throw new Error(`User not autorized`);
+         throw ApiError.UnauthorizedError();
       }
       const tokens = tokenService.generateToken({ id: user._id });
       await tokenService.saveToken(user._id, tokens.refreshToken);

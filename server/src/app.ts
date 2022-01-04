@@ -2,9 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connect from './db/connect';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
+import errorMidleware from './middleware/error.middleware';
 
 dotenv.config();
 const app = express();
@@ -12,6 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
+app.use(errorMidleware);
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
