@@ -14,7 +14,7 @@ module.exports = {
 		port: 3000,
 	},
 	resolve: {
-		extensions: ['.js', '.ts', '.jsx', '.tsx', '.json']
+		extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

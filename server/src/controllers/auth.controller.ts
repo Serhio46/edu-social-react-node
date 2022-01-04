@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import authService from '../sevices/auth.service';
+//import authService from 'sevices/auth.service';
 
 class AuthController {
    async logIn(req: Request, res: Response, next: NextFunction) {

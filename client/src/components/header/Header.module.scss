@@ -1,0 +1,24 @@
+.header{
+	height: 60px;
+	background-color: royalblue;
+	color: #ffffff;
+	margin-bottom: 20px;
+}
+.wrapper{
+	display: flex;
+	align-items: center;
+	width: 1200px;
+	margin: 0 auto;
+	height: 100%;
+}
+.headerLogo{
+	width: 200px;
+	padding-left: 8px;
+
+}
+.container{
+	width: 700px;
+}
+.notification{
+	width: 300px;
+}
