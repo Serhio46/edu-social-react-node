@@ -16,9 +16,38 @@
 	padding-left: 8px;
 
 }
-.container{
+.headerSearch{
 	width: 700px;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+.containerSearch{
+	width: 580px;
+	display: flex;
+	align-items: center;
+	background: #ffff;
+	border-radius: 20px;
+	padding-left: 10px;
+
+}
+.search{
+	height: 40px;
+	width: 500px;
+	outline: none;
+	font-size: 14px;
+	font-family: "Roboto", sans-serif;
 }
 .notification{
 	width: 300px;
+}
+.auth{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.noAuth{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
