@@ -6,14 +6,13 @@ import Feed from 'components/feed/Feed';
 import RightBar from 'components/rightBar/RightBar';
 import Registration from 'pages/registration/Registration';
 import Login from 'pages/login/Login';
+import AppRouter from 'components/AppRouter';
 
 function App() {
    return (
       <div className="wrapper">
          <Header />
-         <div className="container">
-            <Registration />
-         </div>
+         <AppRouter />
       </div>
    );
 }
@@ -21,7 +20,9 @@ function App() {
 export default App;
 
 {
-   /* <SideBar />
-<Feed />
-<RightBar /> */
+   /* <div className="container">
+   <SideBar />
+   <Feed />
+   <RightBar />
+</div>; */
 }

@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
 import MyButton from 'components/button/MyButton';
 import classes from 'pages/registration/registration.module.scss';
+import { Link } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const validationSchema = Yup.object({
-   userName: Yup.string().required('Required'),
-   email: Yup.string().email('Invalid email format').required('Required'),
-   password: Yup.string().required('Required').min(3).max(12),
-   confirmPassword: Yup.string()
-      .required('Require')
-      .oneOf([Yup.ref('password'), null]),
-});
-
 const Registration: FC = () => {
+   const validationSchema = Yup.object({
+      userName: Yup.string().required('Required'),
+      email: Yup.string().email('Invalid email format').required('Required'),
+      password: Yup.string().required('Required').min(3).max(12),
+      confirmPassword: Yup.string()
+         .required('Require')
+         .oneOf([Yup.ref('password'), null]),
+   });
+   console.log('render component');
    const formik = useFormik({
       initialValues: {
          email: '',
@@ -128,7 +129,10 @@ const Registration: FC = () => {
                <MyButton type="submit" title="Sign In" />
             </form>
             <div className={classes.signIn}>
-               Elready have an account? <a>LogIn</a>
+               Elready have an account?
+               <Link to="/login">
+                  <span className={classes.login}>LogIn</span>
+               </Link>
             </div>
          </div>
       </div>
