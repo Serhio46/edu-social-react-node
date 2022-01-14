@@ -3,7 +3,7 @@ export interface IUser {
    email: string;
    userName: string;
    roles: string[];
-   avatar?: string;
+   avatar: string;
    courses: string[];
    followers: string[];
    followings: string[];

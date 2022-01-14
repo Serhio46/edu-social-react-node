@@ -5,8 +5,12 @@ import { Link } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { ISignUp } from 'models/ISignUp';
+import { AuthActionTypes } from 'store/reducers/auth/types';
 
 const Registration: FC = () => {
+   const dispatch = useDispatch();
    const validationSchema = Yup.object({
       userName: Yup.string().required('Required'),
       email: Yup.string().email('Invalid email format').required('Required'),
@@ -15,7 +19,6 @@ const Registration: FC = () => {
          .required('Require')
          .oneOf([Yup.ref('password'), null]),
    });
-   console.log('render component');
    const formik = useFormik({
       initialValues: {
          email: '',
@@ -25,13 +28,13 @@ const Registration: FC = () => {
          roles: '',
       },
       onSubmit: (values) => {
-         const user = {
+         const user: ISignUp = {
             email: values.email,
             userName: values.userName,
             password: values.password,
             roles: values.roles,
          };
-         console.log(user);
+         dispatch({ type: AuthActionTypes.CREATE_USER, payload: user });
       },
       validationSchema,
    });

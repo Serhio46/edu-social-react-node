@@ -19,6 +19,11 @@ const authReducer = (state = initialState, action: AuthActions): AuthReducerStat
             ...state,
             isAuth: action.payload,
          };
+      case AuthActionTypes.SET_IS_LOADING:
+         return {
+            ...state,
+            isLoading: action.payload,
+         };
       default:
          return state;
    }

@@ -4,9 +4,17 @@ import classes from './Header.module.scss';
 import { Search, Login, Logout } from '@mui/icons-material';
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useTypedSelector } from 'components/hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { AuthActionTypes } from 'store/reducers/auth/types';
 
 const Header: FC = () => {
-   const isAuth: boolean = false;
+   const dispatch = useDispatch();
+   const isAuth = useTypedSelector(({ authReducer }) => authReducer.isAuth);
+
+   const logOut = (): void => {
+      dispatch({ type: AuthActionTypes.LOGOUT_USER });
+   };
 
    return (
       <div className={classes.header}>
@@ -28,7 +36,7 @@ const Header: FC = () => {
                {isAuth ? (
                   <div className={classes.auth}>
                      <Notification newMessage={2} />
-                     <IconButton color="inherit">
+                     <IconButton onClick={logOut} color="inherit">
                         <Logout />
                      </IconButton>
                   </div>

@@ -11,6 +11,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       if (!userData) {
          throw new Error('User not autorized');
       }
+
       req.body.user = userData;
       next();
    } catch (error) {

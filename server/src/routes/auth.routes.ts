@@ -14,6 +14,6 @@ router.post('/logout', authController.logOut);
 router.get('/refresh', authController.refreshToken);
 
 //make session
-router.get('/auth', authMiddleware, authController.makeSession);
+router.get('/', authMiddleware, authController.makeSession);
 
 export default router;

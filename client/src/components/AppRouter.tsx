@@ -3,8 +3,6 @@ import { RoutesName, publicRoutes } from 'routes/index';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
 const AppRouter: FC = () => {
-   //const isAuth: boolean = false;
-   console.log(publicRoutes);
    return (
       <>
          {

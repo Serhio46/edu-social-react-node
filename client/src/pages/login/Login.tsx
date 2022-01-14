@@ -5,25 +5,29 @@ import { Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-const validationSchema = Yup.object({
-   email: Yup.string().email('Invalid email format').required('Required'),
-   password: Yup.string().required('Required').min(3).max(12),
-});
+import { useDispatch } from 'react-redux';
+import { ILogin } from 'models/ILogin';
+import { AuthActionTypes } from 'store/reducers/auth/types';
 
 const Login: FC = () => {
-   console.log('headre');
+   const dispatch = useDispatch();
+
+   const validationSchema = Yup.object({
+      email: Yup.string().email('Invalid email format').required('Required'),
+      password: Yup.string().required('Required').min(3).max(12),
+   });
+
    const formik = useFormik({
       initialValues: {
          email: '',
          password: '',
       },
       onSubmit: (values) => {
-         console.log(values);
-         const user = {
+         const user: ILogin = {
             email: values.email,
             password: values.password,
          };
+         dispatch({ type: AuthActionTypes.LOGIN_USER, payload: user });
       },
       validationSchema,
    });
