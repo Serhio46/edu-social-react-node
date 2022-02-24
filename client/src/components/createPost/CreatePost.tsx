@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import classes from 'components/CreatePost/CreatePost.module.scss';
+import axios from 'axios';
 
 import { Paper, Box, Divider, Avatar, Typography, TextField, Button } from '@material-ui/core';
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,16 +16,54 @@ const useStyles = makeStyles({
    },
 });
 
+type IPost = {
+   userId: string;
+   id: string;
+   title: string;
+   body: string;
+};
+
+type IUSer = {
+   id: number;
+   name: string;
+};
+const getUser = (): Promise<IUSer> =>
+   new Promise((res, rej) => {
+      res({ id: 1, name: 'Semen' });
+      rej(new Error('something went wrong'));
+   });
+
+const URL = 'https://jsonplaceholder.typicode.com/posts?limit=10';
+
 const CreatePost: FC = () => {
    const castomClasses = useStyles();
 
+   const [user, setUser] = useState<IUSer>();
+   const [posts, setPosts] = useState<IPost[]>([]);
+
+   useEffect(() => {
+      const loadUser = async () => {
+         const user = await getUser();
+         setUser(user);
+      };
+      loadUser();
+   }, []);
+
+   const handleFetch = async () => {
+      try {
+         const posts = await axios.get<IPost[]>(URL);
+         setPosts(posts.data);
+      } catch (error) {}
+   };
+
    const onCreatePost = (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
-      console.log('rabotaet');
+      setUser({ id: 1, name: 'Serhio' });
    };
 
    return (
       <Paper elevation={5} className={classes.paper}>
+         <img src="" alt="avatar" />
          <Box
             sx={{
                display: 'flex',
@@ -32,9 +71,14 @@ const CreatePost: FC = () => {
             }}
          >
             <Avatar className={classes.avatar}>
+               {user && <div>Logged in {user.name}</div>}
                <PersonIcon />
             </Avatar>
-            <TextField InputProps={{ disableUnderline: true }} placeholder="Whats in your mind?" variant="standard" />
+            <TextField
+               InputProps={{ disableUnderline: true }}
+               placeholder="Whats in your mind?"
+               variant="standard"
+            />
          </Box>
          <Divider variant="middle" />
          <form className={classes.form} onSubmit={onCreatePost}>
@@ -65,6 +109,18 @@ const CreatePost: FC = () => {
                Share
             </Button>
          </form>
+         <ul>
+            {posts.map(({ title, id, body }) => {
+               return (
+                  <li key={id}>
+                     <h2>{title}</h2>
+                     <p>{body}</p>
+                  </li>
+               );
+            })}
+         </ul>
+
+         <button onClick={handleFetch}>Get posts</button>
       </Paper>
    );
 };

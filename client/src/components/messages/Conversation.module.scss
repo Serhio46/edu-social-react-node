@@ -1,0 +1,20 @@
+.wrapper{
+	padding: 10px;
+	width: 100%;
+	padding-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&:hover{
+		cursor: pointer;
+		background-color: darkgray;
+	}
+	&:first-child {
+		margin-right: 100px;
+	}
+}
+.lastMessage {
+	flex-grow: 1;
+}
+

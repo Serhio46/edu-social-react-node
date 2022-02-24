@@ -7,6 +7,7 @@ import RightBar from 'components/rightBar/RightBar';
 import Registration from 'pages/registration/Registration';
 import Login from 'pages/login/Login';
 import AppRouter from 'components/AppRouter';
+import SideBarItem from 'components/sideBarItem/SideBarItem';
 
 function App() {
    return (

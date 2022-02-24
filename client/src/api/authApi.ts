@@ -3,13 +3,17 @@ import axios from 'axios';
 import { ILogin } from 'models/ILogin';
 
 export const createUser = async (user: ISignUp) => {
-   const response = await axios.post('http://localhost:5000/api/user', user);
-   return response.data;
+   try {
+      const response = await axios.post('http://localhost:5000/api/user', user);
+      return response.data;
+   } catch (error) {}
 };
 
 export const signInUser = async (user: ILogin) => {
-   const response = await axios.post('http://localhost:5000/api/auth/login', user);
-   return response.data;
+   try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', user);
+      return response.data;
+   } catch (error) {}
 };
 
 export const makeUserSession = async () => {

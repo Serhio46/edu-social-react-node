@@ -1,8 +1,10 @@
 import { all, spawn, call } from 'redux-saga/effects';
 import { authSaga } from 'store/sagas/auth/authSaga';
+import { dialogSaga } from 'store/sagas/dialogs/dialogSaga';
+import { messagesSaga } from 'store/sagas/messages/messagesSaga';
 
 export function* rootSaga(): any {
-   const sagas = [authSaga];
+   const sagas = [authSaga, dialogSaga, messagesSaga];
    const retrySagas = yield sagas.map((saga) => {
       return spawn(function* () {
          while (true) {

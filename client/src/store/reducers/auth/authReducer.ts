@@ -1,7 +1,7 @@
 import { AuthReducerState, AuthActions, AuthActionTypes } from 'store/reducers/auth/types';
 import { IUser } from 'models/IUser';
 
-const initialState: AuthReducerState = {
+export const initialState: AuthReducerState = {
    user: {} as IUser,
    isLoading: false,
    isAuth: false,

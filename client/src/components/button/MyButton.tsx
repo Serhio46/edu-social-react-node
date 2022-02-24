@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, ButtonTypeMap } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 interface PropButton {
    title: string;

@@ -1,12 +1,18 @@
 import { IUserResponse } from 'models/IUserResponse';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { createUser, signInUser, makeUserSession, logOutUser } from 'api/authApi';
-import { AuthActionTypes, CreateUserAction, SignInAction } from 'store/reducers/auth/types';
+import {
+   AuthActionTypes,
+   CreateUserAction,
+   SignInAction,
+   LogOutAction,
+} from 'store/reducers/auth/types';
 import { AuthActionCreators } from 'store/reducers/auth/authAction';
 import { IUser } from 'models/IUser';
+import { SagaIterator } from 'redux-saga';
 
 //Sagas
-function* signUp(action: CreateUserAction) {
+export function* signUp(action: CreateUserAction): SagaIterator {
    try {
       yield put(AuthActionCreators.setIsLoading(true));
       const userData: IUserResponse = yield call(createUser, action.payload);
@@ -15,11 +21,11 @@ function* signUp(action: CreateUserAction) {
       yield put(AuthActionCreators.setAuth(true));
       yield put(AuthActionCreators.setIsLoading(false));
    } catch (error: any) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
    }
 }
 
-function* signIn(action: SignInAction) {
+export function* signIn(action: SignInAction): SagaIterator {
    try {
       yield put(AuthActionCreators.setIsLoading(true));
       const userData: IUserResponse = yield call(signInUser, action.payload);
@@ -28,24 +34,24 @@ function* signIn(action: SignInAction) {
       yield put(AuthActionCreators.setAuth(true));
       yield put(AuthActionCreators.setIsLoading(false));
    } catch (error: any) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
    }
 }
 
-function* logOut() {
-   console.log('saga logout');
+export function* logOut(): SagaIterator {
    try {
       yield put(AuthActionCreators.setIsLoading(true));
       yield call(logOutUser);
+      localStorage.removeItem('token');
       yield put(AuthActionCreators.setUser({} as IUser));
       yield put(AuthActionCreators.setAuth(false));
       yield put(AuthActionCreators.setIsLoading(false));
    } catch (error: any) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
    }
 }
 
-function* makeSession() {
+export function* makeSession(): SagaIterator {
    try {
       yield put(AuthActionCreators.setIsLoading(true));
       const userData: IUserResponse = yield call(makeUserSession);
@@ -54,13 +60,13 @@ function* makeSession() {
       yield put(AuthActionCreators.setAuth(true));
       yield put(AuthActionCreators.setIsLoading(false));
    } catch (error: any) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
    }
 }
 
 //Watcher
 
-export function* authSaga() {
+export function* authSaga(): SagaIterator {
    yield takeEvery(AuthActionTypes.CREATE_USER, signUp);
    yield takeEvery(AuthActionTypes.LOGIN_USER, signIn);
    yield takeEvery(AuthActionTypes.AUTH_USER, makeSession);

@@ -12,9 +12,8 @@ module.exports = {
 	},
 	devServer: {
 		port: 3000,
-		/* historyApiFallback: true,
-		contentBase: './',
-		hot: true */
+		historyApiFallback: true,
+		hot: true
 	},
 	resolve: {
 		extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],

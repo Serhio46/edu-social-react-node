@@ -40,7 +40,6 @@ export interface SignInAction {
 export interface MakeSessionAction {
    type: AuthActionTypes.AUTH_USER;
 }
-
 export interface LogOutAction {
    type: AuthActionTypes.LOGOUT_USER;
 }

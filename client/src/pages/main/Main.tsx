@@ -7,7 +7,6 @@ const Main: FC = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      console.log('effect');
       dispatch({ type: AuthActionTypes.AUTH_USER });
    }, []);
 
